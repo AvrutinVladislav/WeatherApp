@@ -7,10 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		575F0BF52BDAACE1008F29C7 /* AddCity.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575F0BF42BDAACE1008F29C7 /* AddCity.swift */; };
 		575F0BFB2BDAB1BA008F29C7 /* SearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575F0BFA2BDAB1BA008F29C7 /* SearchBar.swift */; };
-		575F0BFD2BDAB2D9008F29C7 /* AddCityListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 575F0BFC2BDAB2D9008F29C7 /* AddCityListCell.swift */; };
-		5763B9362BE0137C007FD20D /* AddCityCellModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5763B9352BE0137C007FD20D /* AddCityCellModel.swift */; };
 		576855312BCFA4050022C98D /* WeatherModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576855302BCFA4050022C98D /* WeatherModel.swift */; };
 		576855332BCFA6F70022C98D /* WeatherViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 576855322BCFA6F70022C98D /* WeatherViewModel.swift */; };
 		5775CAE72BCD5BA80080CFDF /* SDWebImageSwiftUI in Frameworks */ = {isa = PBXBuildFile; productRef = 5775CAE62BCD5BA80080CFDF /* SDWebImageSwiftUI */; };
