@@ -27,7 +27,8 @@ struct AddCityListCell: View {
                             }
                         }
                         HStack {
-                            Text(verbatim: "\(weather.mintemp_c)°/\(weather.maxtemp_c)°")
+//                            Text(verbatim: "\(weather.mintemp_c)°/\(weather.maxtemp_c)°")
+                            Text(verbatim: "25\30")
                         }
                     }
                     .padding(.leading, 16)
