@@ -6,11 +6,13 @@
 //
 
 import SwiftUI
+import Combine
 
 struct WeatherView: View {
     
     @StateObject var weatherViewModel = WeatherViewModel()
-    private let locManager = LocationManager()
+    private let locationManager = LocationManager()
+    private var cancellables: Set<AnyCancellable> = []
     
     var body: some View {
         
@@ -23,11 +25,7 @@ struct WeatherView: View {
         .onAppear {
             
             DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
-                guard let cityName = locManager.cityName, !cityName.isEmpty else {
-                    print("Error: City name is empty")
-                    return }
-                
-                weatherViewModel.getWeatherResponse(cityName)
+                weatherViewModel.getWeatherResponse()
             }
         }
     }
@@ -39,7 +37,6 @@ struct WeatherView: View {
                     
                     HStack {
                         
-                        customButton(title: "", image: "plus")
                         Spacer()
                         
                         Text(verbatim: weather.location.name)
@@ -48,16 +45,6 @@ struct WeatherView: View {
                             .font(.system(size: 25))
                         
                         Spacer()
-                        
-                        Button {
-                            
-                        } label: {
-                            
-                            Image(.threeDotsVertical)
-                                .foregroundStyle(.white)
-                                .frame(width: 32, height: 32)
-                        }
-                        
                     }
                     .padding(.horizontal, 16)
                     .padding(.top, 16)
@@ -122,7 +109,7 @@ struct WeatherView: View {
                                                   bottomText: "\(weather.current.humidity) %")
                         }
                     }
-                    .padding(.init(top: 5, leading: 15, bottom: 10, trailing: 15))
+                    .padding(.init(top: 5, leading: 15, bottom: 15, trailing: 15))
                     
                 }
                 .background(LinearGradient(gradient: Gradient(colors: [.startMainGradient, .hourlyWeather]), startPoint: .top, endPoint: .bottom))
@@ -283,8 +270,4 @@ struct WeatherView: View {
 
 #Preview {
     WeatherView()
-}
-
-extension Notification.Name {
-    static let name = Notification.Name("name")
 }
