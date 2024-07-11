@@ -6,35 +6,62 @@
 //
 
 import Foundation
+import Combine
 
 class WeatherViewModel: ObservableObject {
     
     @Published var weather: WeatherResponse?
     
     private let apiKey = "aa23208b1c1944de8f790230241204"
+    private var cancellables: Set<AnyCancellable> = []
     
-    func fetchHourlyWeather(_ cityName: String) {
-        
-        guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=aa23208b1c1944de8f790230241204&q=\(cityName)&days=7&aqi=no&alerts=no") else {
-            print("Error: Url")
-            return
-        }
-        URLSession.shared.dataTask(with: url) { data, response, error in
-            guard let data else {
-                print("Error: failure data from hourly response")
-                return
-            }
-            DispatchQueue.main.async {
-                do {
-                    self.weather = try JSONDecoder().decode(WeatherResponse.self, from: data)
-                } catch let error {
-                    print("Error decoding hourly weather JSON: \(error)")
+    func getWeatherResponse(_ cityName: String) {
+        fetchHourlyWeather(cityName)
+            .sink { complition in
+                switch complition {
+                case .failure(let error):
+                    print("Error: \(error)")
+                default: break
+                }
+            } receiveValue: { [weak self] weatherResponse in
+                DispatchQueue.main.async {
+                    self?.weather = weatherResponse
                 }
             }
-        }
-        .resume()
+            .store(in: &cancellables)
+
     }
     
+    func fetchHourlyWeather(_ cityName: String) -> AnyPublisher<WeatherResponse, Error> {
+        let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=aa23208b1c1944de8f790230241204&q=\(cityName)&days=7&aqi=no&alerts=no")
+        return URLSession.shared.dataTaskPublisher(for: url!)
+            .map(\.data)
+            .decode(type: WeatherResponse.self, decoder: JSONDecoder())
+            .eraseToAnyPublisher()
+    }
+    
+//    func fetchHourlyWeather(_ cityName: String) {
+//        
+//        guard let url = URL(string: "https://api.weatherapi.com/v1/forecast.json?key=aa23208b1c1944de8f790230241204&q=\(cityName)&days=7&aqi=no&alerts=no") else {
+//            print("Error: Url")
+//            return
+//        }
+//        URLSession.shared.dataTask(with: url) { data, response, error in
+//            guard let data else {
+//                print("Error: failure data from hourly response")
+//                return
+//            }
+//            DispatchQueue.main.async {
+//                do {
+//                    self.weather = try JSONDecoder().decode(WeatherResponse.self, from: data)
+//                } catch let error {
+//                    print("Error decoding hourly weather JSON: \(error)")
+//                }
+//            }
+//        }
+//        .resume()
+//    }
+//    
 }
     
     extension WeatherViewModel {

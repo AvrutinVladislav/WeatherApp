@@ -100,8 +100,8 @@
             filePath = "WeatherApp/ViewModels/WeatherViewModel.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "62"
-            endingLineNumber = "62"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "formateDate(date:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -116,8 +116,8 @@
             filePath = "WeatherApp/View/WeatherView.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "75"
+            endingLineNumber = "75"
             landmarkName = "compactTopView()"
             landmarkType = "7">
          </BreakpointContent>

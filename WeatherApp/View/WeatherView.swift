@@ -6,7 +6,6 @@
 //
 
 import SwiftUI
-import SDWebImageSwiftUI
 
 struct WeatherView: View {
     
@@ -23,12 +22,12 @@ struct WeatherView: View {
         }
         .onAppear {
             
-            DispatchQueue.main.asyncAfter(deadline: .now() + 3.0) {
+            DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                 guard let cityName = locManager.cityName, !cityName.isEmpty else {
                     print("Error: City name is empty")
                     return }
                 
-                weatherViewModel.fetchHourlyWeather(cityName)
+                weatherViewModel.getWeatherResponse(cityName)
             }
         }
     }
@@ -88,7 +87,7 @@ struct WeatherView: View {
                             
                             Text(verbatim: weather.forecast.forecastday[0].day.condition.text)
                                 .foregroundStyle(.white)
-                                .font(.system(size: 20, weight: .regular))
+                                .font(.system(size: 15, weight: .regular))
                             
                         }
                         

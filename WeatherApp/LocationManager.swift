@@ -7,11 +7,12 @@
 
 import Foundation
 import CoreLocation
+import Combine
 
 class LocationManager: NSObject, ObservableObject {
     
     private var locationManager = CLLocationManager()
-    @Published var cityName: String?
+    var cityName: String?
     
     override init() {
         super.init()
